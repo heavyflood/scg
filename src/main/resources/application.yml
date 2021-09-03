@@ -28,14 +28,14 @@ spring:
             lower-case-service-id: true
         routes:
           - id: user-service
-            uri: lb://userservice
+            uri: http://userservice
             predicates:
             - Path=/user/**
             filters:
             - RewritePath=/user/(?<path>.*),/$\{path}
             
           - id: account-service
-            uri: lb://accountservice
+            uri: http://accountservice
             predicates:
             - Path=/account/**
             filters:
