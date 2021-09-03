@@ -19,6 +19,8 @@ spring:
       enabled: true
       reload:
         enabled: false
+      discovery:
+        wait-cache-ready: false  
     gateway:
         discovery:
           locator:
