@@ -1,0 +1,48 @@
+server:
+  port: 8080
+---
+management:
+    endpoints:
+        web:
+            exposure:
+                include:
+                    - "gateway"
+    endpoint:
+        gateway:
+            enabled: true
+spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    kubernetes:
+      enabled: true
+      reload:
+        enabled: true
+    gateway:
+        discovery:
+          locator:
+            enabled: true
+            lower-case-service-id: true
+        globalcors:
+          cors-configurations:
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedCredentials: true
+            maxAge: 7200
+            allowdHeaders: "*"
+        routes:
+          - id: user-service
+            uri: lb://userservice
+            predicates:
+            - Path=/user/**
+            filters:
+            - RewritePath=/user/(?<path>.*),/$\{path}
+            
+          - id: account-service
+            uri: lb://accountservice
+            predicates:
+            - Path=/account/**
+            filters:
+            - RewritePath=/account/(?<path>.*),/$\{path}
+
