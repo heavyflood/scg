@@ -18,19 +18,12 @@ spring:
     kubernetes:
       enabled: true
       reload:
-        enabled: true
+        enabled: false
     gateway:
         discovery:
           locator:
             enabled: true
             lower-case-service-id: true
-        globalcors:
-          cors-configurations:
-            allowedOrigins: "*"
-            allowedMethods: "*"
-            allowedCredentials: true
-            maxAge: 7200
-            allowdHeaders: "*"
         routes:
           - id: user-service
             uri: lb://userservice
