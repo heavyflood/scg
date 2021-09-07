@@ -20,22 +20,26 @@ spring:
       reload:
         enabled: false
       discovery:
+        service-name: gateway
+        primary-port-name: 9090
+        enabled: true
+        all-namespaces: true
         wait-cache-ready: false  
     gateway:
         discovery:
           locator:
-            enabled: true
+            enabled: false
             lower-case-service-id: true
         routes:
           - id: user-service
-            uri: http://user
+            uri: lb://user
             predicates:
             - Path=/user/**
             filters:
             - RewritePath=/user/(?<path>.*),/$\{path}
             
           - id: account-service
-            uri: http://account
+            uri: lb://account
             predicates:
             - Path=/account/**
             filters:
