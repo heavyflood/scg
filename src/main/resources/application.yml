@@ -35,13 +35,13 @@ spring:
             uri: lb://user
             predicates:
             - Path=/user/*
-            filters:
-            - RewritePath=/user/(?<path>.*),/$\{path}
+            #filters:
+            #- RewritePath=/user/(?<path>.*),/$\{path}
             
           - id: account-service
             uri: lb://account
             predicates:
             - Path=/account/*
-            filters:
-            - RewritePath=/account/(?<path>.*),/$\{path}
+            #filters:
+            #- RewritePath=/account/(?<path>.*),/$\{path}
 
